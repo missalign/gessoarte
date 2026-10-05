@@ -535,6 +535,23 @@ ul {
     color: var(--accent-color);
 }
 
+#atendimento .container  {
+    display: flex;
+    flex-direction: row;
+}
+
+.contact-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-column:nth-child(2) {
+    justify-content: flex-end;
+    padding: 32px;
+}
+
 /* ==========================================================================
    CONTATO
    ========================================================================== */
