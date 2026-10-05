@@ -19,20 +19,28 @@
 </head>
 <body>
 
+
     <!-- 1. Cabeçalho / Navegação -->
     <header class="header">
         <div class="container nav-container">
             <img class="logo" src="img/logo.svg">
-            <nav class="nav-menu">
+            
+            <!-- Botão Hambúrguer para Mobile -->
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
                 <ul>
                     <li><a href="#inicio">Início</a></li>
                     <li><a href="#sobre">Quem Somos</a></li>
                     <li><a href="#servicos">Serviços</a></li>
-                    <!-- <li><a href="#portfolio">Portfólio</a></li> -->
                     <li><a href="#atendimento">Atendimento</a></li>
-                    <!-- <li><a href="#contato">Contato</a></li> -->
+                    <!-- <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#contato">Contato</a></li> -->
                 </ul>
             </nav>
+
             <a href="https://wa.me/5548999377853?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="btn btn-header" target="_blank" rel="noopener">
                 <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento
             </a>
@@ -53,7 +61,7 @@
             <h1>Há 30 anos transformando ambientes com elegância e precisão em Florianópolis e Região</h1>
             <p>Tradição e excelência em soluções de gesso acartonado (drywall), sancas, forros e acabamentos decorativos para projetos residenciais e comerciais.</p>
             <div class="hero-buttons">
-                <a href="https://wa.me/5548999999999?text=Olá!%20Gostaria%20de%20falar%20no%20WhatsApp." class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener">
+                <a href="https://wa.me/5548999377853?text=Olá!%20Gostaria%20de%20falar%20no%20WhatsApp." class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener">
                     <i class="fa-brands fa-whatsapp"></i> Contato WhatsApp
                 </a>
                 <a href="#servicos" class="btn btn-outline">Nossos Serviços</a>
@@ -402,6 +410,52 @@
 
         // Alterna o slide a cada 5 segundos (5000ms)
         setInterval(nextSlide, 5000);
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // --- Script do Carrossel do Hero ---
+        const slides = document.querySelectorAll(".hero-slide");
+        let currentIndex = 0;
+
+        function nextSlide() {
+            slides[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.add("active");
+        }
+
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
+
+        // --- Script do Menu Hambúrguer Mobile ---
+        const menuToggle = document.getElementById("mobile-menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
+        const toggleIcon = menuToggle.querySelector("i");
+        const navLinks = navMenu.querySelectorAll("a");
+
+        // Alterna abertura/fechamento ao clicar no ícone
+        menuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("active");
+            
+            // Troca o ícone de hambúrguer para 'X' quando aberto
+            if (navMenu.classList.contains("active")) {
+                toggleIcon.classList.remove("fa-bars");
+                toggleIcon.classList.add("fa-xmark");
+            } else {
+                toggleIcon.classList.remove("fa-xmark");
+                toggleIcon.classList.add("fa-bars");
+            }
+        });
+
+        // Fecha o menu automaticamente após clicar em qualquer link da página
+        navLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                navMenu.classList.remove("active");
+                toggleIcon.classList.remove("fa-xmark");
+                toggleIcon.classList.add("fa-bars");
+            });
+        });
     });
 </script>
 

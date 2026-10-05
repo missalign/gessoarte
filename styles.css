@@ -706,8 +706,21 @@ ul {
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE (MOBILE)
+   MENU HAMBÚRGUER E RESPONSIVIDADE (MOBILE)
    ========================================================================== */
+
+/* Botão Hambúrguer (oculto em telas grandes) */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--dark-color);
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
 @media (max-width: 992px) {
     .sobre-grid,
     .contact-box {
@@ -720,12 +733,51 @@ ul {
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        display: none; /* Em produção, sugere-se implementar um menu hambúrguer */
+    /* Exibe o botão do hambúrguer */
+    .mobile-menu-toggle {
+        display: block;
     }
 
+    /* Oculta o botão de WhatsApp do header no mobile para economizar espaço */
     .header .btn-header {
         display: none;
+    }
+
+    /* Transforma o menu navegável em um painel suspenso */
+    .nav-menu {
+        position: absolute;
+        top: 80px; /* Logo abaixo do cabeçalho */
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Classe ativada via JavaScript quando o menu é aberto */
+    .nav-menu.active {
+        max-height: 400px; /* Altura máxima para expandir */
+        opacity: 1;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .hero-content h1 {
@@ -740,5 +792,8 @@ ul {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+    #atendimento .container {
+        flex-direction: column;
     }
 }
